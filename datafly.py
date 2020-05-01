@@ -75,7 +75,7 @@ class _Table:
 
         self._debug("[DEBUG] Creating the output file...", _DEBUG)
         try:
-            output = open(output_path, 'w')
+            output = open(output_path, 'w', newline='')
         except IOError:
             raise
         self._log("[LOG] Created output file.", endl=True, enabled=v)
@@ -258,16 +258,15 @@ class _Table:
 
                     # Skip this row if it must be ignored:
                     if table_row is None:
-                        self._debug("[DEBUG] Skipped reading row %d from original table..." % i,
-                                    _DEBUG)
+                        self._debug("[DEBUG] Skipped reading row %d from original table..." % i, _DEBUG)
                         continue
 
                     # Find sequence corresponding to this row index:
                     for qi_sequence in qi_frequency:
                         if i in qi_frequency[qi_sequence][1]:
                             line = self._set_values(table_row, qi_sequence, qi_names)
-                            self._debug("[DEBUG] Writing line %d from original table to anonymized "
-                                        "table..." % i, _DEBUG)
+                            self._debug("[DEBUG] Writing line %d from original table to anonymized table..."
+                                        % i, _DEBUG)
                             print(line, file=output, end="")
                             break
 
