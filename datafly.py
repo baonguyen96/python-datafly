@@ -240,10 +240,16 @@ class _Table:
             else:
 
                 self._debug("[DEBUG] Suppressing max k non k-anonymous tuples...")
+
                 # Drop tuples which occur less than k times:
+                qi_frequency_k_or_more = {}
+
                 for qi_sequence, data in qi_frequency.items():
-                    if data[0] < k:
-                        qi_frequency.pop(qi_sequence)
+                    if data[0] >= k:
+                        qi_frequency_k_or_more[qi_sequence] = data
+
+                qi_frequency = qi_frequency_k_or_more
+
                 self._log("[LOG] Suppressed %d tuples." % count, endl=True, enabled=v)
 
                 # Start to read the table file from the start:

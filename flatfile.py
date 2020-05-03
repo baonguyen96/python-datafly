@@ -1,3 +1,9 @@
+"""
+Prepare flat file to be in common format that datafly can consume.
+Drop all specified identity columns and use comma as delimiter.
+"""
+
+
 import argparse
 import csv
 import sys
@@ -27,6 +33,7 @@ if __name__ == "__main__":
             ignored_indexes = []
 
             for i in range(len(fields)):
+                # TODO: make this case-insensitive
                 if fields[i] in args.unique_identifier:
                     ignored_indexes.append(i)
 
